@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/index.js",
     "build": "tsc",
-    "dev": "nodemon --watch index.ts --ext ts,js --exec ts-node index.ts"
+    "dev": "nodemon --watch index.ts --ext ts,js --exec ts-node index.ts",
+    "dev:worker": "nodemon --watch worker --ext ts,js --exec ts-node worker/worker.ts"
   },
   "keywords": [],
   "author": "",
@@ -28,8 +29,15 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@langchain/community": "^0.3.41",
+    "@langchain/core": "^0.3.49",
+    "@langchain/openai": "^0.5.7",
+    "@langchain/qdrant": "^0.1.2",
+    "bullmq": "^5.51.1",
     "cors": "^2.8.5",
+    "langchain": "^0.3.24",
     "multer": "^1.4.5-lts.2",
+    "pdf-parse": "^1.1.1",
     "server": "file:"
   }
 }
