@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import multer from "multer";
@@ -53,7 +54,8 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
 app.get("/chat", async (req: express.Request, res: express.Response) => {
   try {
-    const data = await vectorStore.similaritySearch("who is ansh?", 2);
+    const userQuery = req.query.message as string;
+    const data = await vectorStore.similaritySearch(userQuery, 2);
     const SYSTEM_PROMPT = `You are a helpful assistant. You have access to the following documents and you can answer questions based on them:
     ${data.map((doc) => doc.pageContent).join("\n\n")}`;
 
@@ -66,7 +68,7 @@ app.get("/chat", async (req: express.Request, res: express.Response) => {
         },
         {
           role: "user",
-          content: "who is ansh?",
+          content: userQuery,
         },
       ],
       max_tokens: 512,
@@ -75,9 +77,8 @@ app.get("/chat", async (req: express.Request, res: express.Response) => {
     const response = chatCompletion.choices[0].message.content;
     console.log(response);
     return res.json({
-      message: "here",
-      data: response,
-      SYSTEM_PROMPT,
+      message: response,
+      data: data,
     });
   } catch (error) {
     res.status(500).json({

@@ -1,4 +1,5 @@
 "use client";
+import Chat from "@/components/Chat";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -48,7 +49,9 @@ export default function Home() {
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel>Two</ResizablePanel>
+      <ResizablePanel>
+        <Chat />
+      </ResizablePanel>
     </ResizablePanelGroup>
   );
 }
