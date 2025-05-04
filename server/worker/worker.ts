@@ -10,7 +10,7 @@ export const vectorStore = new QdrantVectorStore(
     apiKey: process.env.HUGGING_FACE_API,
   }),
   {
-    url: "http://localhost:6333",
+    url: process.env.QUDRANT_URL,
     collectionName: "pdf-docs",
   }
 );
@@ -39,7 +39,7 @@ const worker = new Worker(
   {
     concurrency: 100,
     connection: {
-      host: "localhost",
+      host: process.env.VALKEY_URL,
       port: 6379,
     },
   }

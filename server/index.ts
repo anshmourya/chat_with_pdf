@@ -19,12 +19,12 @@ const storage = multer.diskStorage({
 });
 
 const client = new OpenAI({
-  baseURL: "https://router.huggingface.co/nebius/v1",
+  baseURL: process.env.HUGGING_FACE_BASE_URL,
   apiKey: process.env.HUGGING_FACE_API,
 });
 const fileQueue = new Queue("fileQueue", {
   connection: {
-    host: "localhost",
+    host: process.env.VALKEY_URL,
     port: 6379,
   },
 });

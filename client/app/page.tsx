@@ -15,7 +15,7 @@ export default function Home() {
       formData.append("file", file[0]);
 
       try {
-        const data = await fetch("http://localhost:8000/upload", {
+        const data = await fetch(process.env.BACKEND_URL + "/upload", {
           method: "POST",
           body: formData,
         });
